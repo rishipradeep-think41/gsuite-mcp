@@ -94,7 +94,6 @@ class GoogleWorkspaceServer {
                   '- "after:2024/01/01 before:2024/02/01" (Emails between specific dates)\n' +
                   '- "is:unread" (Unread emails)\n' +
                   '- "from:@company.com has:attachment" (Emails from a company domain with attachments)',
-                required: true,
               },
               maxResults: {
                 type: "number",
