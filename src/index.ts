@@ -303,13 +303,13 @@ class GoogleWorkspaceServer {
       const getEmailBody = (payload: any): string => {
         if (!payload) return "";
 
-        if (payload.body && payload.body.data) {
+        if (payload.body?.data) {
           return Buffer.from(payload.body.data, "base64").toString("utf-8");
         }
 
         if (payload.parts && payload.parts.length > 0) {
           for (const part of payload.parts) {
-            if (part.mimeType === "text/plain") {
+            if (part.mimeType === "text/plain" && part.body?.data) {
               return Buffer.from(part.body.data, "base64").toString("utf-8");
             }
           }
@@ -378,13 +378,13 @@ class GoogleWorkspaceServer {
       const getEmailBody = (payload: any): string => {
         if (!payload) return "";
 
-        if (payload.body && payload.body.data) {
+        if (payload.body?.data) {
           return Buffer.from(payload.body.data, "base64").toString("utf-8");
         }
 
         if (payload.parts && payload.parts.length > 0) {
           for (const part of payload.parts) {
-            if (part.mimeType === "text/plain") {
+            if (part.mimeType === "text/plain" && part.body?.data) {
               return Buffer.from(part.body.data, "base64").toString("utf-8");
             }
           }
@@ -413,7 +413,6 @@ class GoogleWorkspaceServer {
           const from = headers?.find((h) => h.name === "From")?.value || "";
           const date = headers?.find((h) => h.name === "Date")?.value || "";
           const body = getEmailBody(detail.data.payload);
-          // Use helper function to extract the email body correctly
 
           return {
             id: msg.id,
